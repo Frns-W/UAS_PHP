@@ -86,9 +86,18 @@ include("../ceklogin.php");
                                                                         <th scope="row"><?=$data['id_produk']?></th>
                                                                     </tr>
                                                                     <tr>
+                                                                        <td>ID Merk</td>
+                                                                        <th scope="row"><?=$data['id_merk']?></th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>ID Kategori</td>
+                                                                        <th scope="row"><?=$data['id_kategori']?></th>
+                                                                    </tr>
+                                                                    <tr>
                                                                         <td>Merk</td>
                                                                         <th scope="row"><?=$data['nama_merk']?></th>
                                                                     </tr>
+                                                                    
                                                                     <tr>
                                                                         <td>Kategori</td>
                                                                         <th scope="row"><?=$data['nm_kategori']?></th>
