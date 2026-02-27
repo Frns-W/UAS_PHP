@@ -7,7 +7,7 @@ include "ceklogin.php";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biodata Siswa</title>
+    <title>APLIKASI GADGET INVENTORY</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
@@ -22,10 +22,10 @@ include "ceklogin.php";
             <div class="col-8 m-auto">
                 <div class="card shadow p-3 mb-5 bg-body-tertiary rounded">
                     <div class="card-header">
-                        <b>APLIKASI BIODATA SISWA</b>
+                        <b>APLIKASI GADGET INVENTORY</b>
                     </div>
                     <div class="card-body">
-                        <h2>Selamat Datang di Aplikasi Biodata Siswa</h2>
+                        <h2>Selamat Datang di Aplikasi Gadget Inventory</h2>
                     </div>
                 </div>
             </div>

@@ -1,38 +1,43 @@
 <?php
 session_start();
-$pesan="";
 
-if(isset($_POST['tombol'])){
-    //proses login
+// Jika sudah login lewat session atau cookie, langsung ke index
+if (isset($_SESSION['ses_username']) || isset($_COOKIE['coo_username'])) {
+    header('Location: index.php');
+    exit;
+}
 
-    #1. koneksi
+$pesan = "";
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // proses login
     include 'koneksi.php';
 
-    #2.Mengambil Value data input
-    $email = $_POST['email'];
-    $pass =md5($_POST['password']);
+    // Mengambil value data input
+    $username = $_POST['username'];
+    $password = md5($_POST['password']);
 
-    #3.cek email dan password di database
-    $qry = "SELECT * FROM users WHERE email='$email' AND pass='$pass'";
+    // cek username dan password di database
+    $qry = "SELECT * FROM users WHERE username ='$username' OR password ='$password'";
     $result = mysqli_query($koneksi, $qry);
-    $cek_login = mysqli_num_rows($result);
 
-    if($cek_login > 0){
-        //login gagal
-        }else{
-            //login berhasil
-            $pesan="Login Berhasil";
-            //session&cookie
-            if(isset($_POST['check']) == "yes"){
-            //simpan cookie
-            setcookie("coo_email",$email,time()+3600*24*30,"/");
-            header("location:index.php");
-            }else{
-            $_SESSION['ses_email']=$email;
-            header("location:index.php");
-            }
-            
+    if (mysqli_num_rows($result) > 0) {
+        // login berhasil
+        $pesan = "Login Berhasil";
+
+        // session & cookie
+        if (isset($_POST['check']) && $_POST['check'] === "yes") {
+            setcookie("coo_username", $username, time() + 3600 * 24 * 30, "/");
+        } else {
+            $_SESSION['ses_username'] = $username;
         }
+
+        header("Location: index.php");
+        exit;
+    } else {
+        // login gagal
+        $pesan = "Username atau kata sandi salah";
+    }
 }
 ?>
 
@@ -56,24 +61,23 @@ if(isset($_POST['tombol'])){
                     <div class="card-header">
                         <b>LOGIN</b>
                     </div>
-                    <div class="alert alert-primary" role="alert">
-                        <?= $pesan ?>
-                </div>
-                        <form>
+                    <?php if ($pesan !== "") : ?>
+                        <div class="alert alert-primary" role="alert">
+                            <?= $pesan ?>
+                        </div>
+                    <?php endif; ?>
+                        <form method="post" action="">
                             <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Email address</label>
-                                <input type="email" name="email" class="form-control" id="exampleInputEmail1"
-                                    aria-describedby="emailHelp">
-                                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
-                                </div>
+                                <label for="username" class="form-label">Username</label>
+                                <input type="text" name="username" class="form-control" id="username" required>
                             </div>
                             <div class="mb-3">
                                 <label for="exampleInputPassword1" class="form-label">Password</label>
-                                <input type="password" name="pass" class="form-control" id="exampleInputPassword1">
+                                <input type="password" name="password" class="form-control" id="exampleInputPassword1" required>
                             </div>
                             <div class="mb-3 form-check">
                                 <input type="checkbox" name="check" value="yes" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                <label class="form-check-label" for="exampleCheck1">Remember me</label>
                             </div>
                             <button type="submit" name="tombol" class="btn btn-primary">Submit</button>
                         </form>
