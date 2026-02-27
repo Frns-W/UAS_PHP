@@ -34,6 +34,8 @@ include("../ceklogin.php");
                                 <tr>
                                     <th scope="row">#</th>
                                     <th scope="col">Nama Produk</th>
+                                    <th scope="col">Kategori</th>
+                                    <th scope="col">Merk</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
@@ -41,8 +43,10 @@ include("../ceklogin.php");
                                 <?php
                                 # koneksi
                                 include("../koneksi.php");
-                                # menuliskan query menampilkan data
-                                $qry = "SELECT * FROM produk";
+                                # menuliskan query menampilkan data dengan double join
+                                $qry = "SELECT p.*, m.nama_merk, k.nm_kategori FROM produk p
+                                        INNER JOIN merk m ON p.id_merk = m.id_merk
+                                        INNER JOIN kategori k ON p.id_kategori = k.id_kategori";
                                 # menjalankan query
                                 $tampil = mysqli_query($koneksi, $qry);
                                 # looping hasil query
@@ -52,6 +56,8 @@ include("../ceklogin.php");
                                     <tr>
                                         <th scope="row"><?= $nomor++ ?></th>
                                         <td><?= $data['nama_produk'] ?></td>
+                                        <td><?= $data['nm_kategori'] ?></td>
+                                        <td><?= $data['nama_merk'] ?></td>
                                         <td>
                                             <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal<?=$data['id_produk']?>"><i class="fa-solid fa-magnifying-glass"></i></button>
                                             <a href="formedit.php?id=<?=$data['id_produk']?>" class="btn btn-info btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
@@ -80,8 +86,12 @@ include("../ceklogin.php");
                                                                         <th scope="row"><?=$data['id_produk']?></th>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td>ID Merk</td>
-                                                                        <th scope="row"><?=$data['id_merk']?></th>
+                                                                        <td>Merk</td>
+                                                                        <th scope="row"><?=$data['nama_merk']?></th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Kategori</td>
+                                                                        <th scope="row"><?=$data['nm_kategori']?></th>
                                                                     </tr>
                                                                     <tr>
                                                                         <td>Harga</td>

@@ -1,18 +1,19 @@
+<?php
+include("../ceklogin.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biodata Siswa</title>
+    <title>Produk</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 
 <body style="background-color:#d1e6d4">
-    <?php
-    include_once("../navbar.php");
-    ?>
+    <?php include_once("../navbar.php"); ?>
 
     <div class="container">
         <div class="row my-5">
@@ -24,24 +25,48 @@
                     <div class="card-body">
                         <form action="proses_tambah.php" method="POST" enctype="multipart/form-data">
                             <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Nama Produk</label>
-                                <input name="nama" type="text" class="form-control" id="exampleInputEmail1"
-                                    aria-describedby="emailHelp">
+                                <label class="form-label">Kategori</label>
+                                <select class="form-control" name="id_kategori">
+                                    <option value="">-Pilih Kategori-</option>
+                                    <?php
+                                    include_once("../koneksi.php");
+                                    $qry_cat="SELECT * FROM kategori";
+                                    $data_cat=mysqli_query($koneksi,$qry_cat);
+                                    foreach($data_cat as $cat){
+                                    ?>
+                                    <option value="<?=$cat['id_kategori']?>"><?=$cat['nm_kategori']?></option>
+                                    <?php } ?>
+                                </select>
                             </div>
                             <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Harga</label>
-                                <input name="harga" type="text" class="form-control" id="exampleInputEmail1"
-                                    aria-describedby="emailHelp">
+                                <label class="form-label">Merk</label>
+                                <select class="form-control" name="id_merk">
+                                    <option value="">-Pilih Merk-</option>
+                                    <?php
+                                    include_once("../koneksi.php");
+                                    $qry_merk="SELECT * FROM merk";
+                                    $data_merk=mysqli_query($koneksi,$qry_merk);
+                                    foreach($data_merk as $merk){
+                                    ?>
+                                    <option value="<?=$merk['id_merk']?>"><?=$merk['nama_merk']?></option>
+                                    <?php } ?>
+                                </select>
                             </div>
                             <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Stok</label>
-                                <input name="stok" type="text" class="form-control" id="exampleInputEmail1"
-                                    aria-describedby="emailHelp">
+                                <label class="form-label">Nama Produk</label>
+                                <input name="nama_produk" type="text" class="form-control">
                             </div>
                             <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Foto</label>
-                                <input name="foto" type="file" class="form-control" id="exampleInputEmail1"
-                                    aria-describedby="emailHelp">
+                                <label class="form-label">Harga</label>
+                                <input name="harga" type="text" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Stok</label>
+                                <input name="stok" type="text" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Foto</label>
+                                <input name="foto" type="file" class="form-control">
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>

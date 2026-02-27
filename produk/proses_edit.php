@@ -2,27 +2,27 @@
     #1. Meng-koneksikan PHP ke MySQL
     include("../koneksi.php");
 
-    #2. Mengambil Value dari Form Tambah
-    $id = $_POST['id'];
-    $nama = $_POST['nama'];
-    $nisn = $_POST['nisn'];
-    $tempat_lahir = $_POST['tempat_lahir'];
-    $tgl_lahir = $_POST['tgl_lahir'];
-    $alamat = $_POST['alamat'];
-    $email = $_POST['email'];
-    $jns_kelamin = $_POST['jns_kelamin'];
-    $jurusans_id = $_POST['jurusans_id'];
-    $gelombang = $_POST['gelombang'];
+    #2. Mengambil nilai form edit produk
+    $id_produk = $_POST['id_produk'];
+    $id_kategori = $_POST['id_kategori'];
+    $id_merk = $_POST['id_merk'];
+    $nama_produk = $_POST['nama_produk'];
+    $harga = $_POST['harga'];
+    $stok = $_POST['stok'];
+    $foto_produk = $_FILES['foto']['name'];
+    $tmp_foto = $_FILES['foto']['tmp_name'];
 
-    #3. Query Insert (proses tambah data)
-    $query = "UPDATE biodata SET nama ='$nama', nisn='$nisn', tempat_lahir='$tempat_lahir', 
-    tgl_lahir='$tgl_lahir', alamat='$alamat', email='$email', jns_kelamin='$jns_kelamin', jurusans_id='$jurusans_id', gelombang_id='$gelombang'    
-    WHERE id='$id'";
+    #3. Menyusun query update
+    if(!empty($foto_produk)){
+        move_uploaded_file($tmp_foto, "../fotoproduk/" . $foto_produk);
+        $query = "UPDATE produk SET id_kategori='$id_kategori', id_merk='$id_merk', nama_produk='$nama_produk', harga='$harga', stok='$stok', foto_produk='$foto_produk' WHERE id_produk='$id_produk'";
+    } else {
+        $query = "UPDATE produk SET id_kategori='$id_kategori', id_merk='$id_merk', nama_produk='$nama_produk', harga='$harga', stok='$stok' WHERE id_produk='$id_produk'";
+    }
 
-    $tambah = mysqli_query($koneksi,$query);
+    $update = mysqli_query($koneksi,$query);
 
-    #4. Jika Berhasil triggernya apa? (optional)
-    if($tambah){
+    if($update){
         header("location:index.php");
     }else{
         echo "Data Gagal diedit";
