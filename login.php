@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = md5($_POST['password']);
 
     // cek username dan password di database
-    $qry = "SELECT * FROM users WHERE username ='$username' OR password ='$password'";
+    $qry = "SELECT * FROM users WHERE username ='$username' AND password ='$password'";
     $result = mysqli_query($koneksi, $qry);
 
     if (mysqli_num_rows($result) > 0) {
