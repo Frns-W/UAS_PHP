@@ -55,7 +55,7 @@ include("../ceklogin.php");
                                 ?>
                                 <tr>
                                     <th scope="row"><?=$nomor++?></th>
-                                    <td><?=$data['nama_kategori']?></td>
+                                    <td><?=$data['nm_kategori']?></td>
                                     
                                     <td>
                                         
@@ -71,7 +71,7 @@ include("../ceklogin.php");
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                Yakin Data Kategori <?=$data['nama_kategori']?> Ingin Dihapus?
+                                                Yakin Data Kategori <?=$data['nm_kategori']?> Ingin Dihapus?
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

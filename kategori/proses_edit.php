@@ -5,12 +5,12 @@
 
     #2. Mengambil Value dari Form Tambah
     $id = $_POST['id_kategori'];
-    $kategori = $_POST['nama_kategori'];
+    $kategori = $_POST['nm_kategori'];
     
 
     
     #3. Query Update (proses edit data)
-    $query = "UPDATE kategori SET nama_kategori='$kategori' 
+    $query = "UPDATE kategori SET nm_kategori='$kategori' 
     WHERE id_kategori='$id'";
     
     $tambah = mysqli_query($koneksi,$query);
