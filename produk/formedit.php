@@ -2,7 +2,7 @@
     
 include_once("../koneksi.php");
 $idedit = $_GET['id'];
-$qry = "SELECT * FROM biodata WHERE id='$idedit'";
+$qry = "SELECT * FROM produk WHERE id_produk='$idedit'";
 $edit = mysqli_query($koneksi,$qry);
 $data = mysqli_fetch_array($edit);
 ?>

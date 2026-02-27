@@ -21,7 +21,7 @@
                         href="http://localhost/PHP_FRANS/UAS_PHP/merk/index.php">Merk</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="logout.php">Logout</a>
+                    <a class="nav-link" href="http://localhost/PHP_FRANS/UAS_PHP/logout.php">Logout</a>
                 </li>
 
             </ul>
